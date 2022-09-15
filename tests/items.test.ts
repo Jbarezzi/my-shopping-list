@@ -49,7 +49,7 @@ describe("Testa GET /items/:id ", () => {
     const item = await client.items.create({ data: body });
     const result = await supertest(app).get(`/items/${item.id}`);
     expect(result.statusCode).toEqual(200);
-    expect(result.body).toEqual(item);
+    expect(result.body).toEqual(expect.objectContaining(item));
   });
   it("Deve retornar status 404 caso não exista um item com esse id", async () => {
     const result = await supertest(app).get("/items/0");
